@@ -1,0 +1,58 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="StandardSite" %>
+
+<%@ Import Namespace="BlogEngine.Core" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server" profile="http://gmpg.org/xfn/11">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="style-min.css" type="text/css" />
+<!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+  <form id="Form1" runat="Server" class="body">
+    <header>
+      <h1><a href="<%=Utils.AbsoluteWebRoot %>"><%=BlogSettings.Instance.Name %></a></h1>
+      <%--      <h2><%=BlogSettings.Instance.Description %></h2>--%>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="<%=Utils.AbsoluteWebRoot %>" rel="home"><%=Resources.labels.home %></a></li>
+        <li><a href="<%=Utils.AbsoluteWebRoot %>archive.aspx"><%=Resources.labels.archive %></a></li>
+        <li><a href="<%=Utils.AbsoluteWebRoot %>contact.aspx"><%=Resources.labels.contact %></a></li>
+        <li><a href="<%=Utils.FeedUrl %>" class="feed">
+          <img src="<%=Utils.ApplicationRelativeWebRoot %>pics/rssButton.png" width="12" height="12" alt="Feed" /><%=Resources.labels.subscribe %></a></li>
+        <li><a href="<%=Utils.AbsoluteWebRoot %>search.aspx"><%=Resources.labels.search %></a></li>
+        <% if (Utils.IsMobile)
+           { %>
+        <li>
+          <blog:MobileThemeSwitch ID="MobileThemeSwitch2" runat="server" /></li>
+        <%
+           }
+        %>
+      </ul>
+
+    </nav>
+
+    <blog:SearchOnSearch ID="SearchOnSearch1" runat="server" MaxResults="3" Headline="You searched for" Text="Here are some results for the search term on this website" />
+    <asp:ContentPlaceHolder ID="cphBody" runat="server" />
+
+    <footer>
+      <blog:WidgetZone ID="WidgetZone1" runat="server" ZoneName="be_WIDGET_ZONE" />
+      <p id="about">
+        <span runat="server" id="aUser"></span><a runat="server" id="aLogin" /><br />
+Powered by <a href="http://www.dotnetblogengine.net">BlogEngine.NET</a> <%=BlogSettings.Instance.Version() %>. NotMetro theme by <a href="http://hmobius.com">Dan Maharry</a>.</p>
+    </footer>
+  </form>
+
+</body>
+</html>
